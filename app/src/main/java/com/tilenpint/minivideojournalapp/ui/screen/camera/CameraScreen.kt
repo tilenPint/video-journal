@@ -20,7 +20,7 @@ import com.tilenpint.minivideojournalapp.model.VideoRecording
 import com.tilenpint.minivideojournalapp.ui.screen.camera.util.recordVideo
 import com.tilenpint.minivideojournalapp.ui.screen.camera.util.ui.BottomSheetContent
 import com.tilenpint.minivideojournalapp.ui.screen.camera.util.ui.CameraPreviewContent
-import com.tilenpint.minivideojournalapp.ui.screen.camera.util.ui.Overlay
+import com.tilenpint.minivideojournalapp.ui.screen.camera.util.ui.CameraOverlay
 
 @Composable
 fun CameraScreen(
@@ -87,7 +87,7 @@ private fun CameraContent(
         modifier = Modifier.fillMaxSize()
     )
 
-    Overlay(
+    CameraOverlay(
         isRecording = state.isRecording,
         rotateCamera = {
             controller.cameraSelector =

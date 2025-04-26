@@ -24,7 +24,7 @@ import com.tilenpint.minivideojournalapp.R
 import com.tilenpint.minivideojournalapp.ui.theme.MiniVideoJournalAppTheme
 
 @Composable
-fun Overlay(
+fun CameraOverlay(
     isRecording: Boolean,
     rotateCamera: () -> Unit,
     recordVideo: () -> Unit
@@ -75,7 +75,7 @@ fun Overlay(
 @Preview
 fun PlayingOverlay() {
     MiniVideoJournalAppTheme {
-        Overlay(isRecording = true, rotateCamera = {}, recordVideo = {})
+        CameraOverlay(isRecording = true, rotateCamera = {}, recordVideo = {})
     }
 }
 
@@ -83,6 +83,6 @@ fun PlayingOverlay() {
 @Preview
 fun PausedOverlay() {
     MiniVideoJournalAppTheme {
-        Overlay(isRecording = false, rotateCamera = {}, recordVideo = {})
+        CameraOverlay(isRecording = false, rotateCamera = {}, recordVideo = {})
     }
 }

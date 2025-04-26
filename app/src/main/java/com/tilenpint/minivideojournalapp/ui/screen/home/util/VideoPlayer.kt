@@ -3,6 +3,7 @@ package com.tilenpint.minivideojournalapp.ui.screen.home.util
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -60,6 +61,8 @@ fun VideoPlayer(video: Video, modifier: Modifier) {
 
     var exoIsPlaying by remember { mutableStateOf(false) }
 
+    var progress by remember { mutableFloatStateOf(0f) }
+
     val exoPlayer = remember(context) {
         ExoPlayer.Builder(context).build().apply {
             repeatMode = Player.REPEAT_MODE_ONE
@@ -79,8 +82,6 @@ fun VideoPlayer(video: Video, modifier: Modifier) {
             })
         }
     }
-
-    var progress by remember { mutableFloatStateOf(0f) }
 
     LaunchedEffect(exoPlayer) {
         while (true) {
@@ -130,50 +131,111 @@ fun VideoPlayer(video: Video, modifier: Modifier) {
             )
         }
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    if (exoIsPlaying) {
-                        Color.Transparent
-                    } else {
-                        Color.Black.copy(0.4f)
-                    }
-                )
-                .clickable {
-                    if (exoIsPlaying) {
-                        exoPlayer.pause()
-                    } else {
-                        exoPlayer.play()
-                    }
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            if (exoIsPlaying) return@Box
-            Icon(
-                modifier = Modifier.size(128.dp),
-                imageVector = Icons.Default.PlayArrow,
-                contentDescription = stringResource(R.string.play)
+        HomeOverlay(
+            video = video,
+            progress = progress,
+            mainAction = {
+                if (exoIsPlaying) {
+                    exoPlayer.pause()
+                } else {
+                    exoPlayer.play()
+                }
+            },
+            exoIsPlaying = exoIsPlaying
+        )
+    }
+}
+
+@Composable
+private fun BoxScope.HomeOverlay(
+    video: Video,
+    mainAction: () -> Unit,
+    exoIsPlaying: Boolean,
+    progress: Float
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                if (exoIsPlaying) {
+                    Color.Transparent
+                } else {
+                    Color.Black.copy(0.4f)
+                }
+            )
+            .clickable(onClick = mainAction),
+        contentAlignment = Alignment.Center
+    ) {
+        if (exoIsPlaying) return@Box
+        Icon(
+            modifier = Modifier.size(128.dp),
+            imageVector = Icons.Default.PlayArrow,
+            contentDescription = stringResource(R.string.play)
+        )
+    }
+
+
+    Column(
+        modifier = Modifier
+            .clip(RoundedCornerShape(topEnd = 64.dp))
+            .background(Color.Black.copy(0.3f))
+            .align(Alignment.BottomStart)
+            .padding(32.dp),
+    ) {
+        if (!video.description.isNullOrBlank()) {
+            Text(video.description)
+        }
+        Text(video.timestamp.convertTimestampToDate())
+    }
+
+    LinearProgressIndicator(
+        modifier = Modifier
+            .fillMaxWidth()
+            .align(Alignment.BottomCenter),
+        progress = { progress }
+    )
+}
+
+@Composable
+@Preview
+private fun HomeOverlayPreviewPlaying() {
+    MiniVideoJournalAppTheme {
+        Box {
+            HomeOverlay(
+                video = Video(
+                    id = "1",
+                    filePath = "",
+                    timestamp = 1232313123,
+                    duration = 0,
+                    thumbnailFilePath = "",
+                    description = "testDescription"
+                ),
+                progress = 0.5f,
+                mainAction = {},
+                exoIsPlaying = true
             )
         }
+    }
+}
 
-
-        Column(
-            modifier = Modifier
-                .clip(RoundedCornerShape(topEnd = 64.dp))
-                .background(Color.Black.copy(0.3f))
-                .align(Alignment.BottomStart)
-                .padding(32.dp),
-        ) {
-            video.description?.let { description -> Text(description) }
-            Text(video.timestamp.convertTimestampToDate())
+@Composable
+@Preview
+private fun HomeOverlayPreviewPaused() {
+    MiniVideoJournalAppTheme {
+        Box {
+            HomeOverlay(
+                video = Video(
+                    id = "1",
+                    filePath = "",
+                    timestamp = 1232313123,
+                    duration = 0,
+                    thumbnailFilePath = "",
+                    description = ""
+                ),
+                progress = 0.5f,
+                mainAction = {},
+                exoIsPlaying = false
+            )
         }
-
-        LinearProgressIndicator(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter),
-            progress = { progress }
-        )
     }
 }
