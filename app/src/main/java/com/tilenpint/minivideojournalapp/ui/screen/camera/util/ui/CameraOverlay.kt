@@ -18,10 +18,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tilenpint.minivideojournalapp.R
 import com.tilenpint.minivideojournalapp.ui.theme.MiniVideoJournalAppTheme
+import com.tilenpint.minivideojournalapp.util.FullScreenPreview
 
 @Composable
 fun CameraOverlay(
@@ -72,7 +72,7 @@ fun CameraOverlay(
 }
 
 @Composable
-@Preview
+@FullScreenPreview
 fun PlayingOverlay() {
     MiniVideoJournalAppTheme {
         CameraOverlay(isRecording = true, rotateCamera = {}, recordVideo = {})
@@ -80,7 +80,7 @@ fun PlayingOverlay() {
 }
 
 @Composable
-@Preview
+@FullScreenPreview
 fun PausedOverlay() {
     MiniVideoJournalAppTheme {
         CameraOverlay(isRecording = false, rotateCamera = {}, recordVideo = {})

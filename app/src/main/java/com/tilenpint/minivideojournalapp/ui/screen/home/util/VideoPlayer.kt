@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -30,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
@@ -47,6 +47,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.tilenpint.minivideojournalapp.R
 import com.tilenpint.minivideojournalapp.Video
 import com.tilenpint.minivideojournalapp.ui.theme.MiniVideoJournalAppTheme
+import com.tilenpint.minivideojournalapp.util.FullScreenPreview
 import com.tilenpint.minivideojournalapp.util.convertTimestampToDate
 import kotlinx.coroutines.delay
 
@@ -178,7 +179,7 @@ private fun BoxScope.HomeOverlay(
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(topEnd = 64.dp))
-            .background(Color.Black.copy(0.3f))
+            .background(MaterialTheme.colorScheme.surface.copy(0.3f))
             .align(Alignment.BottomStart)
             .padding(32.dp),
     ) {
@@ -197,7 +198,7 @@ private fun BoxScope.HomeOverlay(
 }
 
 @Composable
-@Preview
+@FullScreenPreview
 private fun HomeOverlayPreviewPlaying() {
     MiniVideoJournalAppTheme {
         Box {
@@ -219,7 +220,7 @@ private fun HomeOverlayPreviewPlaying() {
 }
 
 @Composable
-@Preview
+@FullScreenPreview
 private fun HomeOverlayPreviewPaused() {
     MiniVideoJournalAppTheme {
         Box {
