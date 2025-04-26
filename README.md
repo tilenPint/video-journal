@@ -25,6 +25,7 @@
 - Tapping a video plays it inline
 - Handle camera permission
 - Share video
+- Github actions Unit Tests runs on Pull Request created
 
 ## TODO
 - Add GitHub Actions to create pull requests, automatically run tests and build release app
