@@ -78,6 +78,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     testImplementation(kotlin("test"))
+    testImplementation(libs.turbine)
 }
 
 sqldelight {
