@@ -36,3 +36,5 @@
 
 ## NOTES
 - Android Studio Version: Android Studio Meerkat | 2024.3.1 Patch 1
+- Minimum SDK: 28
+- Target SDK: 35
