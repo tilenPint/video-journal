@@ -73,7 +73,7 @@ fun CameraOverlay(
 
 @Composable
 @FullScreenPreview
-fun PlayingOverlay() {
+fun PlayingOverlayPreview() {
     MiniVideoJournalAppTheme {
         CameraOverlay(isRecording = true, rotateCamera = {}, recordVideo = {})
     }
@@ -81,7 +81,7 @@ fun PlayingOverlay() {
 
 @Composable
 @FullScreenPreview
-fun PausedOverlay() {
+fun PausedOverlayPreview() {
     MiniVideoJournalAppTheme {
         CameraOverlay(isRecording = false, rotateCamera = {}, recordVideo = {})
     }
