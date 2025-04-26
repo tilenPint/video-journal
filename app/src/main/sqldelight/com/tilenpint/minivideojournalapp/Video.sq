@@ -1,0 +1,16 @@
+CREATE TABLE Video (
+    id TEXT PRIMARY KEY,
+    filePath TEXT NOT NULL,
+    timestamp INTEGER NOT NULL,
+    duration INTEGER NOT NULL,
+    thumbnailFilePath TEXT NOT NULL,
+    description TEXT
+);
+
+insertVideo:
+INSERT INTO Video(id, filePath, timestamp, duration, thumbnailFilePath, description)
+VALUES (?, ?,?,?, ?, ?);
+
+getVideos:
+SELECT * FROM Video
+ORDER BY timestamp DESC;

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Mini Video Journal App</string>
+    <string name="rotate_camera">Rotate camera</string>
+    <string name="start_recording">Start recording</string>
+    <string name="save">Save</string>
+    <string name="play">Play</string>
+    <string name="add_desc">Add Description (optional)</string>
+    <string name="add">Add</string>
 </resources>
