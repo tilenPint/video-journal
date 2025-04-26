@@ -1,14 +1,13 @@
 package com.tilenpint.minivideojournalapp.ui.screen.camera
 
+import app.cash.turbine.test
 import com.tilenpint.minivideojournalapp.fake.FakeVideoRepository
 import com.tilenpint.minivideojournalapp.model.VideoRecording
 import com.tilenpint.minivideojournalapp.repository.VideoRepository
-import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -51,22 +50,10 @@ class CameraViewModelImplTest {
 
     @Test
     fun `emitted back`() = runTest {
-        viewModel.emitVideo(testVideo)
-
-        var emitted: Unit? = null
-
-        val job = launch {
-            viewModel.emitBackNavigation.collect {
-                emitted = it
-                cancel()
-            }
+        viewModel.emitBackNavigation.test {
+            viewModel.saveVideo()
+            assertEquals(awaitItem(), Unit)
         }
-
-        viewModel.saveVideo()
-
-        job.join()
-
-        assertEquals(Unit, emitted)
     }
 }
 
