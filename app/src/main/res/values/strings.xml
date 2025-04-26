@@ -6,4 +6,6 @@
     <string name="play">Play</string>
     <string name="add_desc">Add Description (optional)</string>
     <string name="add">Add</string>
+    <string name="share">Share</string>
+    <string name="share_video_via">Share video via</string>
 </resources>

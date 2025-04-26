@@ -3,14 +3,16 @@ package com.tilenpint.minivideojournalapp.ui.screen.home.util.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.tilenpint.minivideojournalapp.Video
 import com.tilenpint.minivideojournalapp.ui.theme.MiniVideoJournalAppTheme
 import com.tilenpint.minivideojournalapp.util.FullScreenPreview
-
+import com.tilenpint.minivideojournalapp.util.ui.ShareButton
 
 @Composable
 fun BoxScope.HomeOverlay(
@@ -34,6 +36,13 @@ fun BoxScope.HomeOverlay(
             .fillMaxWidth()
             .align(Alignment.BottomCenter),
         progress = { progress }
+    )
+
+    ShareButton(
+        videoPath = video.filePath,
+        modifier = Modifier
+            .align(Alignment.TopEnd)
+            .padding(8.dp)
     )
 }
 
